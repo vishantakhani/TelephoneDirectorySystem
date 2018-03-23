@@ -1,0 +1,810 @@
+CREATE TABLE primary_address (
+    paddid integer NOT NULL,
+    addline1 character varying NOT NULL,
+    addline2 character varying NOT NULL,
+    addline3 character varying NOT NULL,
+    addtype character varying NOT NULL,
+    city character varying NOT NULL,
+    pin integer NOT NULL
+);
+
+
+ALTER TABLE public.primary_address OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16421)
+-- Name: primary_contact; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE primary_contact (
+    pconid integer NOT NULL,
+    pnum numeric NOT NULL,
+    email character varying NOT NULL
+);
+
+
+ALTER TABLE public.primary_contact OWNER TO postgres;
+
+--
+-- TOC entry 169 (class 1259 OID 16408)
+-- Name: sec_address; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sec_address (
+    paddid integer,
+    addline1 character varying,
+    addline2 character varying,
+    addline3 character varying,
+    addtype character varying,
+    city character varying,
+    pin integer,
+    saddid integer NOT NULL
+);
+
+
+ALTER TABLE public.sec_address OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16539)
+-- Name: sec_address_saddid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sec_address_saddid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sec_address_saddid_seq OWNER TO postgres;
+
+--
+-- TOC entry 1966 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: sec_address_saddid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sec_address_saddid_seq OWNED BY sec_address.saddid;
+
+
+--
+-- TOC entry 172 (class 1259 OID 16475)
+-- Name: sec_contact; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sec_contact (
+    pconid integer,
+    pnum numeric,
+    stdnum numeric,
+    sconid integer NOT NULL
+);
+
+
+ALTER TABLE public.sec_contact OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16529)
+-- Name: sec_contact_sconid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sec_contact_sconid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sec_contact_sconid_seq OWNER TO postgres;
+
+--
+-- TOC entry 1967 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: sec_contact_sconid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sec_contact_sconid_seq OWNED BY sec_contact.sconid;
+
+
+--
+-- TOC entry 171 (class 1259 OID 16439)
+-- Name: user_profile; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE user_profile (
+    uid integer NOT NULL,
+    fname character varying NOT NULL,
+    lname character varying NOT NULL,
+    dob date NOT NULL,
+    pconid integer,
+    paddid integer,
+    password character varying
+);
+
+
+ALTER TABLE public.user_profile OWNER TO postgres;
+
+--
+-- TOC entry 1939 (class 2604 OID 16541)
+-- Name: saddid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sec_address ALTER COLUMN saddid SET DEFAULT nextval('sec_address_saddid_seq'::regclass);
+
+
+--
+-- TOC entry 1940 (class 2604 OID 16531)
+-- Name: sconid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sec_contact ALTER COLUMN sconid SET DEFAULT nextval('sec_contact_sconid_seq'::regclass);
+
+
+--
+-- TOC entry 1951 (class 0 OID 16400)
+-- Dependencies: 168
+-- Data for Name: primary_address; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY primary_address (paddid, addline1, addline2, addline3, addtype, city, pin) FROM stdin;
+1	639 Pellentesque Rd.	Ap #562-1337 Arcu. Ave	Ap #282-7047 Justo. Rd.	office	Shahjahanpur	971038
+3	Ap #748-9451 Pede Street	Ap #642-5826 Vestibulum Ave	Ap #805-4616 Risus, St.	office	Raurkela Civil Township	938938
+5	Ap #325-5132 Sagittis Av.	566-7567 Ipsum Ave	7987 Ut Street	office	Shimoga	318536
+7	Ap #716-3249 Nullam Rd.	P.O. Box 619, 4664 Parturient Rd.	Ap #270-9371 Leo, Rd.	office	Dehradun	134204
+9	3002 Ut Rd.	P.O. Box 779, 2659 Nunc St.	Ap #859-9631 Euismod Street	office	Nagpur	656993
+11	6648 Ac Road	9397 Quam. Ave	7940 Sed, Avenue	office	Jaunpur	527767
+13	P.O. Box 181, 1241 Blandit Av.	551-2361 Mollis Avenue	4565 Ultricies St.	office	Bettiah	339794
+15	P.O. Box 198, 6626 Gravida Rd.	736-608 Aenean St.	Ap #614-683 Tellus Rd.	office	Sambalpur	575677
+17	P.O. Box 138, 1568 Molestie Avenue	1395 Pede, Rd.	Ap #219-6331 Sed Avenue	office	Bhubaneswar	969064
+19	9123 Natoque Street	Ap #731-7750 Lobortis Av.	P.O. Box 440, 7361 Odio Av.	office	Shivapuri	414174
+21	P.O. Box 111, 1221 Et, Rd.	4752 Fringilla Rd.	199-1807 Non, Avenue	office	Cochin	544578
+23	Ap #571-3447 Et Rd.	Ap #588-6540 Consectetuer, Av.	446-2921 Neque Av.	office	Hisar	242497
+25	Ap #168-3997 Aliquam Rd.	6902 Ipsum St.	6525 Arcu. Street	office	Nizamabad	853460
+27	811-6125 Velit. Av.	Ap #543-4666 Odio. Avenue	819-4367 Luctus St.	office	Navadwip	361251
+93	5712 Nunc Avenue	985-8128 Felis St.	P.O. Box 773, 1458 Non, Avenue	office	Proddatur	776969
+4113	sargaasan circle			home	gandhinagar	382006
+4118	b-104	sukan villas	sargaasan circle	home	gandhinagar	382006
+29	3153 Dolor. Rd.	398-8578 Libero Rd.	Ap #544-9682 Nulla Avenue	office	Amravati	572164
+31	Ap #542-4574 Tortor, Rd.	P.O. Box 178, 395 Ut Street	Ap #615-9828 Ipsum Rd.	office	Dehri	399300
+33	Ap #291-6441 Nulla St.	861-7515 In Ave	Ap #366-1868 Enim. St.	office	Sitapur	616084
+35	P.O. Box 134, 7341 Nulla Ave	878-9295 Consectetuer Ave	P.O. Box 583, 2949 Nulla Av.	office	Achalpur	847794
+37	540-5265 Ullamcorper St.	Ap #163-9067 Nec St.	P.O. Box 352, 9857 Ac Road	office	Karimnagar	415246
+39	313-5165 Ut Av.	P.O. Box 886, 647 Posuere Rd.	P.O. Box 764, 2720 Dolor Ave	office	Gondiya	526316
+41	346-2256 Suspendisse St.	Ap #849-4371 Vulputate, St.	7230 Molestie St.	office	Chapra	154991
+43	P.O. Box 454, 5924 Quisque Rd.	8873 Vitae St.	Ap #194-3250 Scelerisque Road	office	Mangalore	524315
+45	P.O. Box 461, 2231 Sed Road	641-7952 Ullamcorper, Rd.	Ap #948-3471 Et Avenue	office	Firozabad	286815
+47	P.O. Box 410, 403 Id Av.	9899 Velit. Avenue	858-5715 Et Avenue	office	Surendranagar	153101
+49	452-8675 Gravida Rd.	937-6500 Duis Rd.	Ap #795-8578 Ut Street	office	Bhusawal	891267
+51	Ap #404-9074 Conubia Road	Ap #954-3065 Aenean Street	Ap #735-2410 Suspendisse Avenue	office	Silchar	769275
+53	987-5172 Cras Av.	P.O. Box 503, 9177 Quam Av.	5196 Leo. Street	office	Tiruchirapalli	203115
+55	Ap #496-8189 Nunc Street	392-5789 Dictum Av.	7910 Proin Ave	office	Moradabad	572086
+57	9085 Eleifend Ave	795-5781 Ipsum St.	Ap #920-4484 Velit Ave	office	Jaunpur	652681
+59	Ap #799-1833 Molestie Road	P.O. Box 892, 5246 Mattis. Av.	557-7390 Dapibus Road	office	Guntakal	677763
+61	498-6145 Dictum Av.	P.O. Box 977, 1518 Proin Ave	873-7396 Arcu. Ave	office	Patna	886415
+63	196-3146 Sapien, St.	Ap #850-8037 Lobortis Rd.	4218 Elit Rd.	office	Gaya	242521
+65	827 Purus Av.	Ap #240-1866 In Rd.	159-8676 Sodales Rd.	office	Muzaffarnagar	386648
+67	Ap #734-4227 Commodo Rd.	662-9543 Mollis. St.	Ap #943-9076 Amet St.	office	Tonk	192571
+69	Ap #815-6099 Quisque St.	519-1345 Sed Avenue	1616 Sed Avenue	office	Bhopal	268385
+71	796 Gravida St.	Ap #773-954 Velit. Ave	223-1197 Nunc Rd.	office	Pimpri-Chinchwad	146702
+73	P.O. Box 655, 4229 Lobortis Road	876-5778 Nisi. Street	P.O. Box 477, 1986 Donec Av.	office	Kollam	690501
+75	813-7207 Ut Street	Ap #377-1603 Arcu. Road	8478 Magnis Rd.	office	Tonk	971901
+77	Ap #281-2478 In Rd.	Ap #834-2748 Per Ave	P.O. Box 825, 8760 Mauris, Avenue	office	Agartala	742086
+79	1864 Magna Av.	P.O. Box 755, 7649 Sodales Rd.	Ap #712-2753 At, St.	office	Unnao	113337
+81	P.O. Box 642, 1123 Nec, Road	Ap #206-5461 Facilisi. Ave	Ap #246-2862 Donec Street	office	Allahabad	778763
+83	1892 Amet Road	624-1096 Cursus, Av.	Ap #594-5915 Tristique Rd.	office	Sonipat	502687
+85	892-106 Semper, Rd.	Ap #181-3048 Ac Road	Ap #507-434 Amet Avenue	office	Tiruvarur	988177
+87	P.O. Box 992, 5385 Nec, St.	3628 Pellentesque Rd.	859-8816 Lorem St.	office	Shimoga	290131
+89	1031 Sit St.	487-9028 Tincidunt Ave	406-9120 Nec St.	office	Jaranwala	914091
+32	3538 Viverra. St.	506 Vulputate, St.	282-6679 Phasellus Rd.	home	Bhopal	252637
+91	Ap #946-5379 Odio. Road	1449 Enim. Ave	Ap #333-4644 Velit. Rd.	office	Lucknow	737383
+4114	ibhjkn	buojkm, 	oihjklnm, 	home	gihjk	654789
+4220	b-104	avavaa	va a sz	home	gandhinagar	382006
+2	P.O. Box 419, 8921 Integer Ave	7644 At, Street	P.O. Box 923, 8005 Orci Street	home	Trivandrum	856002
+4	Ap #567-9264 Iaculis Rd.	P.O. Box 637, 1570 Ligula Av.	Ap #796-5059 Est Rd.	home	Sagar	383580
+6	Ap #520-5369 Aliquet Avenue	Ap #193-1250 Nisl. Rd.	2229 Dui. Street	home	Surendranagar	255575
+8	400-675 Sed Ave	1819 Sed Street	P.O. Box 452, 4586 Placerat, Ave	home	Beawar	492145
+10	P.O. Box 654, 6122 Rutrum, Ave	1613 Velit Road	Ap #717-6291 Varius St.	home	Bihar Sharif	913473
+12	P.O. Box 541, 9236 Cursus Rd.	P.O. Box 218, 8176 Ultricies Avenue	Ap #196-2763 Ridiculus Av.	home	Sikar	368909
+14	P.O. Box 660, 5266 Nullam Av.	309-7781 Per Road	557-3788 Metus. Rd.	home	Nellore	661668
+16	Ap #693-8430 Mi Road	905-312 Arcu St.	P.O. Box 197, 850 Faucibus Ave	home	Godhra	367622
+18	8541 Torquent Street	Ap #905-7607 Vel, St.	Ap #358-6957 Dictum Rd.	home	Muzaffarpur	472666
+20	7678 Molestie. Road	322-9965 Ac St.	430-9088 Imperdiet Rd.	home	Shahjahanpur	839775
+22	Ap #489-8592 Curabitur St.	Ap #770-812 Suspendisse Av.	204-3907 Enim Ave	home	Hapur	876122
+24	P.O. Box 940, 5763 Augue Rd.	P.O. Box 757, 4105 Posuere, Ave	Ap #408-9513 At, Road	home	Hyderabad	703166
+26	8430 Dignissim St.	P.O. Box 704, 5240 Vulputate Rd.	Ap #931-7442 Vivamus Rd.	home	Brahmapur	823221
+28	128-1801 Eget Av.	669-433 Luctus Rd.	P.O. Box 814, 1897 Mi St.	home	Sangli	975748
+30	994-6584 Egestas. St.	P.O. Box 877, 2690 Curabitur Ave	Ap #455-2585 Vivamus Street	home	Rajahmundry	521913
+34	6277 Elit, Avenue	3346 At Avenue	P.O. Box 293, 3435 Mauris St.	home	Anand	368202
+36	P.O. Box 669, 332 Ante Avenue	427-1963 Magna. Road	Ap #271-5179 Elit Street	home	Guwahati	721462
+38	6291 Mi Ave	Ap #958-5730 Ac Street	631 Ornare St.	home	Tuticorin	964690
+40	574 Semper Road	5412 Ipsum St.	P.O. Box 583, 3599 Morbi Avenue	home	Bettiah	312699
+42	P.O. Box 116, 7233 Cras Rd.	P.O. Box 211, 4505 Facilisis Av.	325-9692 Eget St.	home	Midnapore	307202
+44	P.O. Box 170, 539 Lacus. Av.	848-3820 A, Rd.	567-1542 Lacus. Ave	home	Pudukkottai	502506
+46	Ap #238-1308 Cum Avenue	459-5802 Sem Rd.	3273 Sit Av.	home	Kota	736219
+48	Ap #514-3339 Mauris Avenue	P.O. Box 873, 4551 Mi Avenue	6019 Metus. Av.	home	Malkajgiri	365922
+50	458-3141 Ac St.	Ap #716-5787 Arcu Avenue	P.O. Box 604, 5718 Nulla Road	home	Farrukhabad-cum-Fatehgarh	263919
+52	7539 Integer Avenue	Ap #294-8568 Dictum Av.	Ap #232-4369 Velit Road	home	Tuticorin	883709
+54	8163 Dui Rd.	P.O. Box 326, 718 Nibh Ave	P.O. Box 603, 4842 Congue. Rd.	home	Darbhanga	197153
+56	914-7646 Arcu. Avenue	509-7718 Egestas. Street	Ap #137-8265 Suspendisse Road	home	Delhi	657924
+58	Ap #316-1419 Viverra. Av.	P.O. Box 782, 8029 Ac St.	8168 Amet, St.	home	Haridwar	450866
+60	P.O. Box 924, 3204 Sed Avenue	Ap #695-4759 Egestas Rd.	Ap #705-4820 Eu St.	home	Thane	606774
+62	5918 Eu, Road	815-886 Proin Rd.	P.O. Box 735, 7755 Pede. Avenue	home	Hospet	830751
+64	651-1593 Nunc St.	P.O. Box 867, 2412 Risus. Av.	124-1014 Mi Av.	home	Puri	993277
+66	7595 Mauris Rd.	Ap #918-6575 Tempor Road	2982 Ultrices Road	home	Pali	774445
+68	440-9271 Sociis Road	Ap #150-6791 Ullamcorper Ave	P.O. Box 409, 8138 Diam Av.	home	Dibrugarh	297948
+70	Ap #899-5531 Etiam Avenue	915-9329 Porttitor Avenue	618-3274 Consectetuer Av.	home	Tiruvannamalai	838085
+72	P.O. Box 906, 8739 Vestibulum Ave	Ap #965-477 Penatibus St.	Ap #455-2246 Urna, Avenue	home	Cuddapah	933176
+74	294-9011 Adipiscing Street	705-3167 Purus. Road	Ap #391-736 Aenean Ave	home	Junagadh	922540
+76	Ap #144-2232 Venenatis Rd.	P.O. Box 681, 2153 Nunc Av.	P.O. Box 288, 3563 Proin Ave	home	Hazaribag	950911
+78	P.O. Box 862, 7709 Sagittis Street	P.O. Box 534, 623 Imperdiet, St.	5608 Duis St.	home	Amroha	430580
+80	Ap #234-8890 Rhoncus. Rd.	P.O. Box 499, 4427 Leo. Av.	758-4943 Mauris St.	home	Ambattur	948625
+82	P.O. Box 855, 7092 Duis Av.	Ap #611-271 Est. Street	Ap #414-4939 Vitae St.	home	Bihar Sharif	623204
+84	4638 Donec Avenue	351-405 Id, St.	Ap #647-6009 Ac Street	home	Saharanpur	790344
+86	Ap #814-2071 Cursus Road	P.O. Box 759, 1909 Ac Av.	P.O. Box 549, 6242 Penatibus Rd.	home	Udaipur	397166
+88	4004 Per St.	P.O. Box 259, 7594 Neque Street	Ap #579-1048 In St.	home	Kamarhati	840020
+90	Ap #252-2675 Erat. Avenue	P.O. Box 155, 9207 Et St.	Ap #696-2913 Iaculis Road	home	Kozhikode	813635
+92	8188 Cras St.	1506 Tortor Road	Ap #431-3765 Nunc. Road	home	Tiruppur	692953
+94	551-4373 Lorem, Rd.	P.O. Box 309, 7072 Donec Ave	6779 Gravida. Ave	home	Porbandar	402326
+96	1345 Gravida Street	P.O. Box 600, 9830 Nulla Rd.	644-113 Nunc Rd.	home	Pali	719981
+98	Ap #830-4472 Orci St.	P.O. Box 886, 8705 Metus. St.	P.O. Box 289, 2812 Nisi Street	home	Korba	267448
+100	P.O. Box 284, 6149 Duis Avenue	Ap #643-2090 Mauris St.	Ap #817-784 Pede, Rd.	home	Vellore	755973
+95	2518 Ac Rd.	4599 Fringilla Street	798 Neque Road	office	Tenali	272947
+97	Ap #727-917 Aliquet Street	7290 Integer Ave	7561 Dignissim St.	office	Delhi	892484
+99	Ap #916-2084 Molestie Ave	849-858 Dictum Rd.	Ap #944-1337 Et St.	office	Bhopal	227413
+4111	veevqwd	vevqcq	cewceq	office	gandhinagar	382006
+4112	Sukan Villas			home	gandhinagar	382006
+0	B-104	sargaasan circle	gandhinagar	home	gandhinagar	382006
+\.
+
+
+--
+-- TOC entry 1953 (class 0 OID 16421)
+-- Dependencies: 170
+-- Data for Name: primary_contact; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY primary_contact (pconid, pnum, email) FROM stdin;
+1001	8883955365	lorem.sit@dictumultricies.net
+1002	9903933675	molestie.Sed@lectuspedeultrices.org
+1003	9545761695	ac@pellentesquetellussem.org
+1004	7300990657	diam.eu.dolor@vitaeorciPhasellus.co.uk
+1005	8468876867	In@ipsumsodalespurus.edu
+1006	8108545323	placerat.augue.Sed@bibendumfermentummetus.edu
+1007	7903432621	convallis@Maecenaslibero.org
+1008	9854716919	rutrum@accumsan.com
+1009	8198754488	Etiam.bibendum@consectetuereuismodest.ca
+1010	8133049543	Donec@porttitorvulputate.org
+1011	9111057931	ac@Crasinterdum.ca
+1012	8538792509	at.auctor@gravidamolestie.co.uk
+1013	7565169957	Donec.nibh@Morbi.org
+1014	8259877682	vitae.sodales@eratnonummyultricies.org
+1015	8935868057	penatibus@est.edu
+1016	9764458166	Sed.nec@nonluctussit.net
+1017	8028257302	ridiculus.mus.Aenean@duiCumsociis.ca
+1018	7687553333	ante.Maecenas@Ut.co.uk
+1019	8676588192	lectus.pede.ultrices@posuere.net
+1020	8012349255	nec.mollis.vitae@metussit.org
+1021	7738080583	consequat.nec@Craseutellus.com
+1022	9712882008	Mauris@Curabiturut.ca
+1023	8435842013	lorem@ornarelectus.co.uk
+1024	7987979240	auctor.quis.tristique@Nulla.org
+1025	9137221739	Donec@etmagnis.org
+1026	8689380541	ipsum.Donec.sollicitudin@molestie.com
+1027	8094953240	Mauris.molestie.pharetra@Nullam.org
+1028	9102139215	semper@et.co.uk
+1029	9278091071	Cum.sociis.natoque@libero.org
+1030	8603583991	tempus.mauris@nunc.co.uk
+1031	7624440298	Donec.luctus@aliquetlobortis.net
+1032	9214054534	molestie.pharetra@loremvehiculaet.co.uk
+1033	8679024897	et@odio.edu
+1034	8029811630	enim@lectusquis.com
+1035	8878344662	euismod.et@orcisem.co.uk
+1036	8786674631	enim.Suspendisse@libero.org
+1037	8134272705	fringilla.cursus.purus@lectus.edu
+1038	7586221262	feugiat@Aliquam.net
+1039	8406856905	amet@lobortisauguescelerisque.com
+1040	9945436640	at.pede@Aenean.edu
+1041	7490315165	a.enim.Suspendisse@purus.edu
+1042	7390663009	tellus.sem.mollis@enim.co.uk
+1043	9138523348	vehicula@rutrum.edu
+1044	8725514932	scelerisque@lacus.co.uk
+1045	9738104901	eleifend@convallis.net
+1046	8298944039	a.magna.Lorem@dignissimmagnaa.net
+1047	9920453930	ante.Nunc@noncursusnon.co.uk
+1048	9532663047	nibh.enim.gravida@dictummagnaUt.com
+1049	9079375762	Donec@Vivamusnisi.ca
+1050	7635692611	dis.parturient@feugiat.co.uk
+1051	9022291245	adipiscing.elit.Curabitur@nonsapien.ca
+1052	8194991871	nisi.nibh@rutrumnonhendrerit.co.uk
+1053	7635377153	justo@nec.com
+1054	8690789451	Pellentesque@at.com
+1055	8788235755	nisi.a@adipiscing.co.uk
+1056	8622644060	scelerisque.neque.Nullam@Fuscefermentumfermentum.com
+1057	9941135473	felis.adipiscing.fringilla@lacusEtiam.ca
+1058	9256976933	ut.sem.Nulla@blandit.net
+1059	8447567934	convallis.in@neceleifendnon.edu
+1060	8117120096	molestie@quis.edu
+1061	8614857571	molestie@egetlaoreetposuere.net
+1062	8920991041	mollis.Integer.tincidunt@Loremipsumdolor.ca
+1063	8284682795	elit@Maurisnondui.ca
+1064	9675092702	eleifend@non.com
+1065	9466267511	erat.in.consectetuer@loremloremluctus.ca
+1066	8984376785	ut.dolor@temporeratneque.org
+1067	9194429395	nunc.Quisque@quis.com
+1068	9939211599	ornare.facilisis.eget@Sedauctor.ca
+1069	8094538396	rhoncus.Proin.nisl@mi.com
+1070	9349448203	pede.Cras.vulputate@dolorelit.net
+1071	7619290175	ac@enim.co.uk
+1072	9134929263	fames@enimmitempor.ca
+1073	8754086197	semper.tellus.id@pretiumaliquet.co.uk
+1074	9957651698	nec.quam.Curabitur@veliteusem.net
+1075	8141176480	molestie.sodales.Mauris@fringillaest.net
+1076	8789985522	augue.ac@placeratvelitQuisque.edu
+1077	7560347512	molestie@disparturientmontes.org
+1078	7936610276	velit.Aliquam.nisl@maurissitamet.ca
+1079	8071002010	nulla.In.tincidunt@musProin.org
+1080	7973085529	risus.Donec.egestas@interdumligulaeu.co.uk
+1081	9928133541	Sed@consequat.org
+1082	9898610819	hendrerit.neque.In@fringilla.edu
+1083	8730035970	Proin.nisl.sem@ametluctusvulputate.co.uk
+1084	7908916530	magna.malesuada@adipiscingnon.ca
+1085	8019512243	consectetuer.cursus.et@nullaCras.co.uk
+1086	9588041197	fringilla.porttitor@ullamcorper.org
+1087	8755197020	luctus.Curabitur@consequatauctor.edu
+1088	7568746579	magna.Nam@molestiedapibus.co.uk
+1089	7711180128	eget@Aliquam.net
+1090	7410255784	ac@amalesuada.org
+1091	7856416101	mus@Integer.org
+1092	9276995134	et.tristique@lobortisquama.edu
+1093	9129985849	at@Nunclectus.org
+1094	8411544104	eu@Proin.org
+1095	9606134521	penatibus.et@aauctornon.org
+1096	9708644690	bibendum.ullamcorper@eutemporerat.edu
+1097	7700532941	justo.Praesent.luctus@sit.org
+1098	9521990594	mattis.ornare@Maecenasmi.com
+1099	7296609546	ac.turpis.egestas@purusinmolestie.com
+1100	7330607839	dolor.Nulla.semper@orciluctus.ca
+4111	9978212220	vishant@gmail.com
+4112	7600134341	vishant@gmail.com
+4113	9978212220	vishant@gmail.com
+4114	7894561230	astha@gmail.com
+0	7600134341	vishant@gmail.com
+4118	9876543210	vishant@gmail.com
+4220	9999999999	vishant@gmail.com
+\.
+
+
+--
+-- TOC entry 1952 (class 0 OID 16408)
+-- Dependencies: 169
+-- Data for Name: sec_address; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sec_address (paddid, addline1, addline2, addline3, addtype, city, pin, saddid) FROM stdin;
+39	8573 Vitae Ave	1926 Ornare Street	119-5125 Sapien, Road	home	Ichalkaranji	937163	2
+64	598-3030 Lorem, Ave	410 Mauris St.	P.O. Box 639, 5610 Ultrices Rd.	home	Nagaon	958659	3
+72	Ap #117-1718 Felis Rd.	245-9847 Sed Av.	659-3287 Arcu. Rd.	home	Dabgram	707519	4
+83	Ap #669-2619 Id St.	1979 Maecenas St.	P.O. Box 476, 8257 Urna. Avenue	home	Hathras	345555	5
+17	7979 Dictum Rd.	Ap #145-5800 Eget Rd.	P.O. Box 465, 1130 A Ave	home	Coimbatore	965716	6
+85	998-2099 Nibh. Road	526 Nullam Ave	P.O. Box 217, 2081 Mauris, St.	home	Cuttack	633667	7
+62	856-9894 Elit Rd.	Ap #807-3753 Dui St.	Ap #547-5500 Primis Avenue	home	Kota	895546	8
+85	403-7864 Molestie Street	6349 Netus Road	P.O. Box 534, 9450 Lectus. Avenue	home	Satna	498469	9
+58	553-4671 Tempus, Rd.	P.O. Box 568, 4082 Est, Ave	Ap #619-6870 Morbi Street	home	Puri	563664	10
+58	P.O. Box 896, 4027 Purus. Ave	P.O. Box 430, 4119 Quis Road	533-8995 Scelerisque, Ave	home	Bhimavaram	994358	11
+68	P.O. Box 908, 4117 Aliquam Avenue	Ap #645-4869 Risus Street	P.O. Box 908, 5049 Fames Rd.	home	Kukatpalle	755206	13
+21	P.O. Box 830, 3869 Semper Ave	6493 Proin Rd.	P.O. Box 117, 4265 Neque Av.	home	Barahanagar	144376	14
+14	903-1791 Eu Rd.	Ap #342-7780 Phasellus Street	P.O. Box 850, 7652 Tellus St.	home	Indore	459219	15
+72	197-8509 Quam Road	P.O. Box 936, 8282 Morbi St.	7837 Dui St.	home	Chapra	400112	16
+33	210-7452 Eget Avenue	964-761 Cum St.	Ap #346-3525 Adipiscing Street	home	Bhagalpur	929859	17
+56	317-8347 Penatibus Rd.	234-3065 Sed, Rd.	Ap #793-5805 Curabitur Street	home	Imphal	404958	18
+78	792 Venenatis Avenue	565-3961 At, St.	Ap #535-9380 Nullam Rd.	home	Etawah	677411	20
+56	5576 Dis Avenue	Ap #728-8699 Proin Rd.	P.O. Box 834, 5847 Sit Rd.	home	Timkur	628876	21
+32	585-3538 A, Road	103-7664 Quis Road	569-6531 Ac Rd.	home	Jabalpur	461373	22
+79	Ap #153-8773 Sed, Road	Ap #917-2025 In, Road	P.O. Box 592, 7715 Et Ave	home	Adoni	976725	23
+37	Ap #165-6653 Integer Rd.	P.O. Box 296, 6986 Proin Avenue	Ap #911-2032 Aliquam St.	home	Nagpur	122609	24
+4	6540 Dictum. St.	424-1718 Tristique Rd.	715-3911 Enim. Ave	home	Tiruchirapalli	769564	25
+31	Ap #799-9880 Nibh St.	1197 Nisl. St.	P.O. Box 353, 5011 Luctus Road	home	Raurkela Civil Township	649759	26
+76	Ap #505-6045 Erat Avenue	559-6079 Convallis Avenue	564-4984 Duis Road	home	Bhubaneswar	848912	27
+17	508-9137 Convallis Avenue	3550 Ligula. Avenue	3106 Sit Rd.	home	Bettiah	809550	28
+24	P.O. Box 974, 2360 Praesent St.	8676 Massa. Road	P.O. Box 899, 7250 Sociis Rd.	home	Raurkela	441520	29
+59	P.O. Box 739, 3030 Eu Av.	7170 Vitae Av.	P.O. Box 251, 4495 Urna. Av.	home	Sirsa	717684	30
+47	Ap #849-1774 At, Ave	Ap #987-9574 Lorem Rd.	P.O. Box 799, 176 Cursus Street	home	Silchar	933710	31
+83	682-7619 Ante St.	317-4197 Ac Road	3582 Non, Road	home	Jammu	749464	32
+48	P.O. Box 936, 6162 At, Av.	Ap #319-2616 Eu, Rd.	P.O. Box 528, 5589 Quis Ave	home	Rae Bareli	403320	33
+65	P.O. Box 314, 5836 Mi Ave	P.O. Box 972, 7447 Eu Rd.	P.O. Box 934, 5277 Varius. Ave	home	Amroha	780390	34
+86	8312 Pharetra. Av.	Ap #612-1214 Posuere Rd.	3431 Nec, Rd.	home	Kota	238753	35
+7	162-3607 Interdum Av.	P.O. Box 860, 9906 Malesuada St.	2080 At Road	home	Pondicherry	495457	36
+20	Ap #758-5390 Aliquet, Ave	Ap #793-9464 In St.	Ap #368-5128 Molestie. Avenue	home	Raurkela	210084	37
+51	P.O. Box 115, 269 Cursus. Rd.	P.O. Box 169, 872 Ut St.	P.O. Box 244, 8938 Non Rd.	home	Bidar	357472	38
+75	9267 Per Ave	122-6642 Aliquam Ave	P.O. Box 354, 2943 Aenean Road	home	Solapur	641797	39
+32	P.O. Box 617, 8262 Ligula. St.	797-7140 Quis Av.	424-6836 Lacinia Av.	home	Hapur	467511	40
+54	Ap #886-3926 Dictum Ave	Ap #354-1916 Magnis Road	Ap #938-2724 Hendrerit Av.	home	Silchar	731806	41
+50	817-951 Aliquam Ave	9897 Magna. Avenue	3467 Aliquet Av.	home	Gaya	214254	42
+81	Ap #647-4615 Morbi Rd.	P.O. Box 222, 1707 Sed Road	P.O. Box 783, 2609 Ac Av.	home	Ajmer	458693	43
+40	P.O. Box 650, 9595 Ut Rd.	7080 Dis Av.	696-6379 Vestibulum St.	home	Gudivada	737534	44
+54	4377 Dui Av.	Ap #775-4196 Molestie Ave	287-6643 Nulla. Road	home	Noida	194564	45
+31	880-3912 Amet, St.	P.O. Box 488, 6165 Ac Ave	686-1364 Duis Road	home	Rajapalaiyam	424792	46
+82	Ap #459-9337 Eu, Ave	9841 Integer Avenue	274-6379 Nec, Street	home	Udaipur	749693	47
+43	3510 Mi Road	Ap #808-3532 Nec St.	Ap #664-9725 Est, Road	home	Arrah	247819	48
+38	P.O. Box 413, 1769 Mi Rd.	696-4934 Lacus, Avenue	734-2926 Non Ave	home	Habra	894153	49
+54	228 Imperdiet St.	P.O. Box 989, 4024 Vel, Rd.	P.O. Box 636, 7336 Dignissim Street	home	Udaipur	574981	50
+\N	\N	\N	\N	home	\N	\N	51
+1	vwes	vwsAD	sa	home	382006	\N	52
+48	P.O. Box 878, 3875 Fringilla, St.	P.O. Box 430, 7870 Rutrum Avenue	267-807 Tristique Rd.	office	Dhanbad	739790	53
+42	5726 Tincidunt Street	652-389 In Ave	1133 Nulla Avenue	office	Raichur	399383	54
+58	582-7786 Dui Street	752-8244 Est, Road	P.O. Box 689, 6851 Sed St.	office	Bilaspur	225973	55
+44	P.O. Box 633, 9689 Eget Road	248-7902 Mollis. Av.	214-9270 Venenatis Street	office	Khandwa	215239	56
+14	P.O. Box 448, 5397 Nec, Rd.	Ap #388-2953 Vel, St.	5598 Quisque Av.	office	Raurkela	655039	57
+40	Ap #564-4011 Pharetra. Road	7372 Metus. Rd.	555-293 Mauris Rd.	office	Daman	750985	58
+3	Ap #615-6193 Feugiat Street	277-3977 Imperdiet St.	Ap #406-242 Vehicula Road	office	Pali	367523	59
+89	9315 Pede. St.	3814 Ante Ave	1551 Libero St.	office	Timkur	409403	60
+68	531-4898 Tincidunt Road	614-9007 Cubilia Road	P.O. Box 288, 6487 Lacinia Av.	office	Sasaram	380765	61
+82	359-7467 Dui Avenue	6431 Tristique Av.	160 Libero Street	office	Katihar	985635	62
+66	Ap #859-9281 Vel St.	P.O. Box 398, 5160 Nec, Road	Ap #192-6711 Ante. Avenue	office	Miraj	205996	63
+66	Ap #859-1648 Vulputate, Street	2788 Conubia St.	438-4686 Gravida. Ave	office	Okara	287883	64
+84	743-176 Mauris St.	428-7395 Sit Street	Ap #517-2339 Nec Avenue	office	North Dum Dum	551926	65
+23	Ap #660-4482 Ipsum. Rd.	111 Et St.	223-1556 Lacus, Av.	office	Rajkot	927414	66
+61	757-4824 Cras Street	P.O. Box 817, 3243 Odio. Street	7425 Turpis. St.	office	Dhanbad	693639	67
+25	Ap #839-5337 Eu Street	376-5399 Auctor. Street	506-7843 Tincidunt Av.	office	Pallavaram	532318	68
+25	6254 Sollicitudin Road	Ap #160-5272 Nibh. Avenue	Ap #607-6680 Magnis Ave	office	Tuticorin	830211	69
+87	759-7447 Purus, Ave	P.O. Box 806, 2884 Lacus. Ave	Ap #432-3660 Metus. Ave	office	Hazaribag	761163	70
+77	5029 Nullam Av.	Ap #354-2410 Est, Av.	Ap #485-8740 Adipiscing Road	office	Vijayawada	154058	71
+42	Ap #411-3850 Consequat Av.	2826 Tempor Road	580-312 Scelerisque St.	office	Bihar Sharif	521355	72
+4	9491 Aenean St.	5247 Eu St.	6308 Mauris Rd.	office	Kohima	508409	73
+12	8468 Aliquet St.	Ap #628-7565 Enim. Rd.	Ap #167-3153 Ornare Street	office	Basirhat	140416	74
+26	128-2258 Donec Road	8275 Vehicula. Road	P.O. Box 234, 7372 Donec St.	office	Ramagundam	400231	75
+68	401-7531 Vitae Av.	177-2534 Eleifend, St.	897-8652 Morbi Avenue	office	Kukatpalle	956322	77
+77	308-6684 Sit Rd.	486-4765 Erat Road	964-9963 Eros Rd.	office	Kohima	965611	78
+8	P.O. Box 662, 8066 Cum Road	Ap #966-5423 Lectus Avenue	P.O. Box 240, 7613 Curae; St.	office	Jabalpur	704567	79
+58	P.O. Box 913, 6224 Id, Avenue	896-2182 Dis Av.	970-8334 Dolor, St.	office	Aligarh	220269	80
+49	340-8427 Erat. Avenue	Ap #738-9194 Posuere Av.	6443 Vel Street	office	Mathura	172793	81
+25	7341 Diam. Road	346-2486 Auctor. St.	987-2519 Lectus Road	office	Jammu	315743	82
+81	413-4191 Urna Street	Ap #907-8758 Tempor Avenue	7112 Tempor Street	office	Vejalpur	803194	83
+89	702-7350 Non St.	172 Auctor Street	P.O. Box 985, 1297 Integer Av.	office	Kanchipuram	193753	84
+48	Ap #983-3832 Etiam Street	P.O. Box 149, 2496 Facilisis Street	Ap #758-4892 Imperdiet Street	office	Tiruvannamalai	190246	85
+21	P.O. Box 887, 4445 Tempus Road	3658 Fermentum St.	Ap #408-6913 Euismod Rd.	office	Silchar	356894	86
+18	P.O. Box 415, 5857 Mauris. St.	933-1241 Netus Road	P.O. Box 982, 3816 Enim St.	office	Miraj	102380	87
+54	777-7163 Nisi. Rd.	614-9798 Ullamcorper Ave	145-1880 Sit Street	office	Nizamabad	643423	88
+85	P.O. Box 205, 5823 Sed Ave	P.O. Box 395, 8715 Mattis Street	220-6365 Elit Avenue	office	Satara	828847	89
+41	5712 Risus Ave	640-8750 Aenean Road	270-9838 Metus Street	office	Pathankot	268649	90
+23	Ap #835-3510 Aliquam Rd.	P.O. Box 181, 4137 Ultrices, Street	P.O. Box 750, 540 Maecenas St.	office	Brahmapur	898826	91
+61	662 Donec St.	3352 Et Road	325-7269 Turpis Street	office	Gaya	457489	92
+33	P.O. Box 806, 7669 Orci Av.	P.O. Box 244, 5598 In St.	Ap #791-1058 Eros. Avenue	office	Munger	983195	93
+50	673-2724 Turpis Ave	497-7850 Etiam Street	2826 Tincidunt Rd.	office	Chapra	732532	94
+75	590-5320 Enim St.	Ap #139-5597 Dictum Avenue	P.O. Box 744, 9064 Integer Avenue	office	Raurkela	149131	95
+37	613-3959 Dolor. Rd.	8239 Cum Rd.	1595 Quam, St.	office	Adoni	685806	96
+35	982-3803 Ipsum Ave	7126 Sem Rd.	9217 Integer Rd.	office	Saharanpur	993341	97
+22	102 Aenean Avenue	825-8934 Laoreet Ave	6445 Ac, Road	office	Tiruchirapalli	114507	98
+35	P.O. Box 521, 5376 Suspendisse Rd.	781-6165 Vivamus Ave	P.O. Box 764, 2610 Augue Rd.	office	Gaya	913890	99
+74	Ap #592-4954 Vel, Road	P.O. Box 222, 1933 Non Rd.	Ap #698-1728 Eget Avenue	office	Tiruvottiyur	879023	100
+83	P.O. Box 161, 3328 Ornare Rd.	3671 Lorem Rd.	587-2316 Etiam Av.	office	Ahmadnagar	786360	101
+33	P.O. Box 624, 3710 Molestie. Ave	168-1805 Luctus St.	Ap #378-3249 Ac Rd.	office	Kukatpalle	473810	102
+\.
+
+
+--
+-- TOC entry 1968 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: sec_address_saddid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sec_address_saddid_seq', 102, true);
+
+
+--
+-- TOC entry 1955 (class 0 OID 16475)
+-- Dependencies: 172
+-- Data for Name: sec_contact; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sec_contact (pconid, pnum, stdnum, sconid) FROM stdin;
+1060	8112512981	\N	1
+1040	9004335212	\N	2
+1019	8588560072	\N	3
+1006	7468141225	\N	4
+1035	7102071392	\N	5
+1059	7530918200	\N	6
+1035	8509344177	\N	7
+1041	7444419438	\N	8
+1094	9874179296	\N	9
+1028	9387000741	\N	10
+1062	9465256997	\N	11
+1093	7517579957	\N	12
+1023	7513741298	\N	13
+1030	8798215040	\N	14
+1029	8582154153	\N	15
+1027	9688523914	\N	16
+1088	8998870023	\N	17
+1035	9535426455	\N	18
+1059	7014685194	\N	19
+1044	7304911481	\N	20
+1019	7123472431	\N	21
+1030	8822252440	\N	22
+1094	7307858223	\N	23
+1099	9554044078	\N	24
+1021	7027304699	\N	25
+1043	9183204585	\N	26
+1073	7950194423	\N	27
+1027	8078701015	\N	28
+1041	7044890622	\N	29
+1071	7558317065	\N	30
+1083	7495129795	\N	31
+1009	9135265387	\N	32
+1021	8654563185	\N	33
+1054	7912441614	\N	34
+1089	7406624660	\N	35
+1018	8202148760	\N	36
+1081	7389488186	\N	37
+1028	7350861056	\N	38
+1038	9011853941	\N	39
+1037	9245989616	\N	40
+1056	9748603116	\N	41
+1076	9730313037	\N	42
+1081	7780046193	\N	43
+1094	8468883764	\N	44
+1069	8932110048	\N	45
+1096	9308913515	\N	46
+1017	7372452541	\N	47
+1095	7868101858	\N	48
+1066	9529743633	\N	49
+1005	7650195981	\N	50
+1063	9593512077	\N	51
+1028	8255449278	\N	52
+1086	7364772885	\N	53
+1014	9055358125	\N	54
+1079	7839133712	\N	55
+1003	9153279052	\N	56
+1033	8321032227	\N	57
+1065	7355412037	\N	58
+1020	9134288529	\N	59
+1031	8162727299	\N	60
+1055	9833256256	\N	61
+1052	9859685210	\N	62
+1035	7984195909	\N	63
+1061	9816693319	\N	64
+1073	7729869132	\N	65
+1019	7570754325	\N	66
+1074	8522426947	\N	67
+1093	8307495563	\N	68
+1002	8164364437	\N	69
+1045	8826017612	\N	70
+1027	9390293558	\N	71
+1078	9949435173	\N	72
+1090	9766786594	\N	73
+1077	7089034476	\N	74
+1051	7537460093	\N	75
+1047	9864654637	\N	76
+1034	9451641194	\N	77
+1097	8490248724	\N	78
+1070	9784451384	\N	79
+1030	7661633414	\N	80
+1009	7844778405	\N	81
+1018	8768696661	\N	82
+1050	9249371945	\N	83
+1012	9238818845	\N	84
+1005	7309465408	\N	85
+1019	8071782950	\N	86
+1082	9595582513	\N	87
+1036	7056341128	\N	88
+1070	8867074877	\N	89
+1033	8319368652	\N	90
+1055	7635285248	\N	91
+1099	8776201966	\N	92
+1011	9001844106	\N	93
+1003	9137424596	\N	94
+1077	9311327504	\N	95
+1057	9937457739	\N	96
+1017	8761452456	\N	97
+1059	8395482474	\N	98
+1099	7565880629	\N	99
+1008	7096301884	\N	100
+\.
+
+
+--
+-- TOC entry 1969 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: sec_contact_sconid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sec_contact_sconid_seq', 100, true);
+
+
+--
+-- TOC entry 1954 (class 0 OID 16439)
+-- Dependencies: 171
+-- Data for Name: user_profile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY user_profile (uid, fname, lname, dob, pconid, paddid, password) FROM stdin;
+4114	astha	bhavsar	1998-02-05	4114	4114	astha
+4220	vishant	akhani	1997-07-28	4220	4220	vishant
+4118	vishant	akhani	1997-07-28	4118	4118	vishant
+4000	Jared	Singh	1996-08-22	1001	1	Jared
+4001	Tarik	Jain	1995-04-02	1002	2	Tarik
+4002	Upton	Raj	1981-06-16	1003	3	Upton
+4003	Genevieve	Jain	2000-05-23	1004	4	Genevieve
+4004	Carlos	Khan	1981-07-24	1005	5	Carlos
+4005	Rose	Kumar	1983-02-18	1006	6	Rose
+4006	Xenos	Kumar	1998-07-29	1007	7	Xenos
+4007	Vielka	Kumar	2000-08-28	1008	8	Vielka
+4008	Tarik	Singh	1981-06-25	1009	9	Tarik
+4009	Kibo	Jain	1999-06-10	1010	10	Kibo
+4010	Jocelyn	Singh	1986-03-30	1011	11	Jocelyn
+4011	Mercedes	Patel	1997-09-19	1012	12	Mercedes
+4012	Melvin	Khan	1993-05-03	1013	13	Melvin
+4013	Byron	Ismail	1984-02-27	1014	14	Byron
+4014	Alexandra	Singh	1991-04-22	1015	15	Alexandra
+4015	Omar	Patel	1981-01-16	1016	16	Omar
+4016	Charles	Patel	1984-05-22	1017	17	Charles
+4017	Jeremy	Khan	1994-04-15	1018	18	Jeremy
+4018	Madeline	Jain	1997-11-20	1019	19	Madeline
+4019	Drake	Jain	1985-07-16	1020	20	Drake
+4020	Alexander	Jain	1984-10-17	1021	21	Alexander
+4021	Zachery	Jain	1988-01-29	1022	22	Zachery
+4022	Maisie	Singh	1991-09-30	1023	23	Maisie
+4023	Russell	Khan	1984-02-15	1024	24	Russell
+4024	Flynn	Raj	2000-07-14	1025	25	Flynn
+4025	Rama	Ismail	1991-04-03	1026	26	Rama
+4026	Adam	Patel	1986-07-06	1027	27	Adam
+4027	Solomon	Jain	1996-07-16	1028	28	Solomon
+4028	Rhoda	Khan	1998-07-30	1029	29	Rhoda
+4029	Dakota	Singh	1991-04-15	1030	30	Dakota
+4030	Gary	Singh	1984-08-12	1031	31	Gary
+4031	Lareina	Ismail	1991-12-04	1032	32	Lareina
+4032	Maile	Jain	1994-10-05	1033	33	Maile
+4033	Melissa	Jain	1989-06-03	1034	34	Melissa
+4034	Herrod	Khan	1992-02-06	1035	35	Herrod
+4035	Micah	Patel	1987-10-26	1036	36	Micah
+4036	Violet	Kumar	1982-04-28	1037	37	Violet
+4037	Anika	Kumar	1996-06-28	1038	38	Anika
+4038	Gil	Ismail	1993-04-10	1039	39	Gil
+4039	Cain	Khan	1982-01-05	1040	40	Cain
+4040	Emi	Patel	1990-08-12	1041	41	Emi
+4041	Fallon	Singh	1993-04-17	1042	42	Fallon
+4042	Hedda	Singh	1999-01-15	1043	43	Hedda
+4043	Bernard	Kumar	1982-04-29	1044	44	Bernard
+4044	Adam	Khan	1984-05-31	1045	45	Adam
+4045	Vincent	Ismail	1983-01-07	1046	46	Vincent
+4046	Wynne	Jain	1982-09-02	1047	47	Wynne
+4047	Basia	Singh	1992-06-08	1048	48	Basia
+4048	Hashim	Singh	2000-07-23	1049	49	Hashim
+4049	Marcia	Patel	1984-12-24	1050	50	Marcia
+4050	Colin	Kumar	1981-02-08	1051	51	Colin
+4051	Malachi	Patel	1999-01-23	1052	52	Malachi
+4052	Marsden	Khan	1984-08-29	1053	53	Marsden
+4053	Germane	Kumar	1984-08-15	1054	54	Germane
+4054	Quamar	Kumar	1996-03-03	1055	55	Quamar
+4055	Clayton	Kumar	1993-05-27	1056	56	Clayton
+4056	Cedric	Singh	1981-12-07	1057	57	Cedric
+4057	Tyrone	Singh	1989-12-26	1058	58	Tyrone
+4058	Naida	Jain	1996-08-07	1059	59	Naida
+4059	Burke	Singh	1988-06-12	1060	60	Burke
+4060	Angela	Patel	1995-02-11	1061	61	Angela
+4061	Cassandra	Ismail	1994-04-14	1062	62	Cassandra
+4062	Renee	Khan	1983-11-22	1063	63	Renee
+4063	Alfonso	Raj	1995-05-07	1064	64	Alfonso
+4064	Fritz	Singh	1993-08-02	1065	65	Fritz
+4065	Clark	Patel	1996-08-15	1066	66	Clark
+4066	Kamal	Ismail	1993-07-07	1067	67	Kamal
+4067	Genevieve	Khan	1988-03-16	1068	68	Genevieve
+4068	Craig	Singh	1993-05-13	1069	69	Craig
+4069	Hedley	Raj	1990-10-06	1070	70	Hedley
+4070	Kennedy	Khan	1994-08-26	1071	71	Kennedy
+4071	Cyrus	Raj	1993-08-11	1072	72	Cyrus
+4072	Maris	Singh	1995-03-03	1073	73	Maris
+4073	Denise	Ismail	1983-02-15	1074	74	Denise
+4074	Sade	Ismail	1992-09-02	1075	75	Sade
+4075	Abra	Patel	1996-01-28	1076	76	Abra
+4076	Marny	Jain	1988-06-02	1077	77	Marny
+4077	Joshua	Ismail	1996-10-08	1078	78	Joshua
+4078	Laith	Ismail	1983-07-08	1079	79	Laith
+4079	Zane	Khan	1983-08-13	1080	80	Zane
+4080	Kirestin	Jain	1984-12-02	1081	81	Kirestin
+4081	Armando	Jain	1984-08-28	1082	82	Armando
+4082	Katell	Ismail	1980-12-12	1083	83	Katell
+4083	Kelsey	Raj	1994-04-22	1084	84	Kelsey
+4084	Erich	Kumar	1997-12-01	1085	85	Erich
+4085	Octavius	Jain	1981-10-29	1086	86	Octavius
+4086	Leonard	Kumar	2000-02-29	1087	87	Leonard
+4087	Dalton	Raj	1995-04-12	1088	88	Dalton
+4088	Imogene	Jain	1981-06-06	1089	89	Imogene
+4089	Angelica	Khan	1989-08-06	1090	90	Angelica
+4090	Kenyon	Jain	1985-02-05	1091	91	Kenyon
+4091	Kevyn	Patel	1991-10-14	1092	92	Kevyn
+4092	Reed	Ismail	1987-01-26	1093	93	Reed
+4093	Lila	Jain	1999-11-16	1094	94	Lila
+4094	Graham	Khan	1981-02-06	1095	95	Graham
+4095	Imogene	Jain	1981-11-08	1096	96	Imogene
+4096	Ella	Ismail	1991-12-03	1097	97	Ella
+4097	Hyatt	Ismail	1999-07-25	1098	98	Hyatt
+4098	Odysseus	Jain	1997-03-27	1099	99	Odysseus
+4099	Destiny	Singh	1990-10-28	1100	100	Destiny
+4111	vishant	akhani	1997-07-28	4111	4111	vishant
+4112	vishant	akhani	1997-07-28	4112	4112	vishant
+4113	vishant	thakkar	1997-07-28	4113	4113	vishant
+\.
+
+
+--
+-- TOC entry 1942 (class 2606 OID 16407)
+-- Name: primary_address_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY primary_address
+    ADD CONSTRAINT primary_address_pkey PRIMARY KEY (paddid);
+
+
+--
+-- TOC entry 1944 (class 2606 OID 16428)
+-- Name: primary_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY primary_contact
+    ADD CONSTRAINT primary_contact_pkey PRIMARY KEY (pconid);
+
+
+--
+-- TOC entry 1946 (class 2606 OID 16446)
+-- Name: user_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY user_profile
+    ADD CONSTRAINT user_profile_pkey PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1947 (class 2606 OID 16416)
+-- Name: sec_address_paddid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sec_address
+    ADD CONSTRAINT sec_address_paddid_fkey FOREIGN KEY (paddid) REFERENCES primary_address(paddid);
+
+
+--
+-- TOC entry 1950 (class 2606 OID 16480)
+-- Name: sec_contact_pconid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sec_contact
+    ADD CONSTRAINT sec_contact_pconid_fkey FOREIGN KEY (pconid) REFERENCES primary_contact(pconid);
+
+
+--
+-- TOC entry 1949 (class 2606 OID 16452)
+-- Name: user_profile_paddid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_profile
+    ADD CONSTRAINT user_profile_paddid_fkey FOREIGN KEY (paddid) REFERENCES primary_address(paddid);
+
+
+--
+-- TOC entry 1948 (class 2606 OID 16447)
+-- Name: user_profile_pconid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_profile
+    ADD CONSTRAINT user_profile_pconid_fkey FOREIGN KEY (pconid) REFERENCES primary_contact(pconid);
+
+
+--
+-- TOC entry 1964 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2018-03-23 18:38:31
+
+--
+-- PostgreSQL database dump complete
+--
+
